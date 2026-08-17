@@ -1,8 +1,24 @@
 ## Case Study #1 - Danny's Diner
 
+Link : https://8weeksqlchallenge.com/case-study-1/
+
+Table of Contents
+
+[Background](#background)
+
+[Entity Relationship Diagram](#entity-relationship-diagram)
+
+[Questions & Solutions](#questions--solutions)
+
+## Background 
+Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite.
+
+## Entity Relationship Diagram
+<img width="397" height="189" alt="image" src="https://github.com/user-attachments/assets/bcc00193-5bc5-4414-b00d-f2e191421ab3" />
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
 
-Questions & Solutions
+## Questions & Solutions
 
 1. What is the total amount each customer spent at the restaurant?
 
