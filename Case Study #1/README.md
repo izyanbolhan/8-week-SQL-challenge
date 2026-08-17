@@ -1,8 +1,8 @@
-## Case Study #1 - Danny's Diner
+# Case Study #1 - Danny's Diner
 
 Link : https://8weeksqlchallenge.com/case-study-1/
 
-Table of Contents
+## Table of Contents
 
 [Background](#background)
 
