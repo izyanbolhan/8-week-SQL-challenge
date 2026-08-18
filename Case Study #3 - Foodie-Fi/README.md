@@ -150,11 +150,41 @@ ON s.plan_id = p.plan_id)t
 ---
 
 5. How many customers have churned straight after their initial free trial - what percentage is this rounded to the nearest whole number?
-6. What is the number and percentage of customer plans after their initial free trial?
-7. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
-8. How many customers have upgraded to an annual plan in 2020?
-9. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
-10. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
-11. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
+```sql
+WITH CTE_churn_rank AS (
+	SELECT
+		s.customer_id,
+		p.plan_name,
+	CASE 
+		WHEN p.plan_name = 'churn' AND rank () OVER (PARTITION BY s.customer_id ORDER BY s.start_date) = 2 THEN 1
+		ELSE 0
+	END as total_churn_after_trial
+	FROM foodie_fi.subscriptions as s
+	LEFT JOIN foodie_fi.plans as p
+	ON s.plan_id = p.plan_id
+)
+
+
+SELECT 
+	total_churn_trial,
+	(100 * total_churn_trial/total_customer) as per_churn_trial
+FROM (
+	SELECT 
+		COUNT (DISTINCT customer_id) as total_customer,
+		SUM (total_churn_after_trial) as total_churn_trial
+	FROM CTE_churn_rank)t
+```
+
+| total_churn_trial | per_churn_trial |
+| ----------------- | --------------- |
+| 92                | 9               |
+
+---
+7. What is the number and percentage of customer plans after their initial free trial?
+8. What is the customer count and percentage breakdown of all 5 plan_name values at 2020-12-31?
+9. How many customers have upgraded to an annual plan in 2020?
+10. How many days on average does it take for a customer to an annual plan from the day they join Foodie-Fi?
+11. Can you further breakdown this average value into 30 day periods (i.e. 0-30 days, 31-60 days etc)
+12. How many customers downgraded from a pro monthly to a basic monthly plan in 2020?
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/rHJhRrXy5hbVBNJ6F6b9gJ/16)
